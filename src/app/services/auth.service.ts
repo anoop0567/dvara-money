@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    user$: Observable<User>;
+    user$: Observable<User | null | undefined>;
 
     constructor(
         private afAuth: AngularFireAuth,
