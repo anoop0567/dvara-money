@@ -30,17 +30,30 @@ export class AppService {
             );
     }
 
-    toggleLikePost(id: string, value: string) {
-        const doc = this.afs.collection<Post>('posts', ref => ref.where('id', '==', id));
-        // doc.snapshotChanges().pipe(
-        //     map(actions => actions.map(a => {
-        //         const data = a.payload.doc.data();
-        //         const id = a.payload.doc.id;
-        //         return { id, ...data };
-        //     }))).subscribe((_doc: any) => {
-        //         let id = _doc[0].payload.doc.id; //first result of query [0]
-        //         this.afs.doc(`posts/${id}`).update({ rating: _value });
-        //     })
+    toggleLikePost(post: Post) {
+        const updatePost = JSON.parse(JSON.stringify(post));
+        if (updatePost.users_liked['YO5FGeN7EteqilcK9ehWy3KNPQu2']) {
+            updatePost.users_liked['YO5FGeN7EteqilcK9ehWy3KNPQu2'] = !updatePost.users_liked['YO5FGeN7EteqilcK9ehWy3KNPQu2'];
+        } else {
+            updatePost.users_liked['YO5FGeN7EteqilcK9ehWy3KNPQu2'] = true;
+        }
+        delete updatePost.curr_user_liked;
+        delete updatePost.curr_user_saved;
+
+        return this.afs.collection<Post>('posts').doc(updatePost.id).update(updatePost);
+    }
+
+    toggleSavePost(post: Post) {
+        const updatePost = JSON.parse(JSON.stringify(post));
+        if (updatePost.users_saved['YO5FGeN7EteqilcK9ehWy3KNPQu2']) {
+            updatePost.users_saved['YO5FGeN7EteqilcK9ehWy3KNPQu2'] = !updatePost.users_saved['YO5FGeN7EteqilcK9ehWy3KNPQu2'];
+        } else {
+            updatePost.users_saved['YO5FGeN7EteqilcK9ehWy3KNPQu2'] = true;
+        }
+        delete updatePost.curr_user_liked;
+        delete updatePost.curr_user_saved;
+
+        return this.afs.collection<Post>('posts').doc(updatePost.id).update(updatePost);
     }
 
 }

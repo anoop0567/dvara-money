@@ -14,18 +14,18 @@
         <main class="card-body">
             <div class="d-flex justify-content-between mb-2">
                 <div class="d-flex align-items-center">
-                    <button class="btn-icon" (click)="toggleLikePost(post.id)">
+                    <button class="btn-icon" (click)="toggleLikePost(post)">
                         <svg width="24" height="24">
                             <use xlink:href="#Unlike" *ngIf="post?.curr_user_liked"></use>
                             <use xlink:href="#Like" *ngIf="!post?.curr_user_liked"></use>
                         </svg>
                     </button>
-                    <span class="mx-1 text-muted">{{post?.likes_count}}</span>
+                    <!-- <span class="mx-1 text-muted">{{post?.likes_count}}</span> -->
                 </div>
-                <button class="btn-icon" (click)="toggleLikePost(post.id)">
+                <button class="btn-icon" (click)="toggleSavePost(post)">
                     <svg width="24" height="24">
                         <use xlink:href="#Save" *ngIf="post?.curr_user_saved" />
-                        <use xlink:href="#Remove" *ngIf="post?.curr_user_saved" />
+                        <use xlink:href="#Remove" *ngIf="!post?.curr_user_saved" />
                     </svg>
                 </button>
             </div>
