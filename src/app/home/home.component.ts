@@ -12,4 +12,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // dummy images array
+  images = [
+    { path: "https://picsum.photos/540" },
+    { path: "https://picsum.photos/540" },
+    { path: "https://picsum.photos/540" },
+    { path: "https://picsum.photos/540" }
+  ]
+
 }
