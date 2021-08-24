@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from '../models/post.model';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  posts: Post[] = [];
+
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
+    this.getFeedPosts();
   }
 
-  // dummy images array
-  images = [
-    { path: "https://picsum.photos/540" },
-    { path: "https://picsum.photos/540" },
-    { path: "https://picsum.photos/540" },
-    { path: "https://picsum.photos/540" }
-  ]
+  getFeedPosts(): void {
+    this.appService.getFeedPosts()
+      .subscribe(posts => {
+        console.log(posts);
+        this.posts = posts;
+      });
+  }
 
 }

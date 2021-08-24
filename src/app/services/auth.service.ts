@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 
 import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -46,8 +46,8 @@ export class AuthService {
         const data = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL
+            display_name: user.displayName,
+            photo_url: user.photoURL
         }
 
         return userRef.set(data, { merge: true })
