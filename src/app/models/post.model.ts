@@ -7,7 +7,9 @@ export interface Post {
     media: string;
     creator: User;
     likes_count: number;
-    users_liked: Array<{ uid: string }>;
-    users_saved: Array<{ uid: string }>;
+    curr_user_liked?: boolean;
+    users_liked?: any;
+    curr_user_saved?: boolean;
+    users_saved?: any;
     created_at: Date;
 }

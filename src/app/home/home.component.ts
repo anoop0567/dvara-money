@@ -25,4 +25,12 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  toggleLikePost(post_id: string) {
+    console.log('Like post');
+  }
+
+  toggleSavePost(post_id: string) {
+    console.log('Save post');
+  }
+
 }
