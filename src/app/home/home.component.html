@@ -1,11 +1,11 @@
-<header class="main-navbar navbar justify-content-center bg-light border-bottom">
+<header class="main-navbar navbar justify-content-center bg-light shadow-sm">
     <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
         <img src="assets/brand/logo.png" alt="logo" height="47">
     </a>
 </header>
 
-<main class="container">
-    <article class="card my-3" *ngFor="let post of posts">
+<main class="container feed-container">
+    <article class="card post-card shadow-sm my-3" *ngFor="let post of posts">
         <header class="card-header bg-light d-flex align-items-center">
             <img class="rounded-circle" width="32" height="32" [src]="post?.creator?.photo_url" alt="user">
             <div class="mx-2 small">{{post?.creator?.display_name}}</div>
@@ -20,7 +20,6 @@
                             <use xlink:href="#Like" *ngIf="!post?.curr_user_liked"></use>
                         </svg>
                     </button>
-                    <!-- <span class="mx-1 text-muted">{{post?.likes_count}}</span> -->
                 </div>
                 <button class="btn-icon" (click)="toggleSavePost(post)">
                     <svg width="24" height="24">
