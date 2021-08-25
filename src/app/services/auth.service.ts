@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from '../models/user.model';
-
-import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
+import { Router } from '@angular/router';
+import firebase from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { User } from '../models/user.model';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    user$: Observable<User | null | undefined>;
+    private _uid: string | undefined;
+    public get uid(): string | undefined {
+        return this._uid;
+    }
+
+    private user$: Observable<User | null | undefined>;
 
     constructor(
         private afAuth: AngularFireAuth,
@@ -31,6 +35,9 @@ export class AuthService {
                 }
             })
         )
+        this.afAuth.authState.subscribe(user => {
+            this._uid = user ? user.uid : undefined;
+        });
     }
 
     async googleSignin() {
@@ -57,5 +64,9 @@ export class AuthService {
     async signOut() {
         await this.afAuth.signOut();
         this.router.navigate(['/']);
+    }
+
+    getLoggedInUserId() {
+        return this.afAuth.authState;
     }
 }
