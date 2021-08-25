@@ -23,8 +23,9 @@ export class HomeComponent implements OnInit {
 
   getFeedPosts(): void {
     this.authService.getLoggedInUserId()
-      .subscribe((uid: any) => {
-        this.appService.getFeedPosts(uid)
+      .subscribe((user: any) => {
+        if (!user || !user.uid) return;
+        this.appService.getFeedPosts(user.uid)
           .subscribe(posts => {
             this.posts = posts;
           });

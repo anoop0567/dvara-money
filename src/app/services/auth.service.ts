@@ -11,12 +11,8 @@ import { User } from '../models/user.model';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    private _uid: string | undefined;
-    public get uid(): string | undefined {
-        return this._uid;
-    }
-
-    private user$: Observable<User | null | undefined>;
+    uid: string | undefined;
+    user$: Observable<User | null | undefined>;
 
     constructor(
         private afAuth: AngularFireAuth,
@@ -36,7 +32,7 @@ export class AuthService {
             })
         )
         this.afAuth.authState.subscribe(user => {
-            this._uid = user ? user.uid : undefined;
+            this.uid = user ? user.uid : undefined;
         });
     }
 
